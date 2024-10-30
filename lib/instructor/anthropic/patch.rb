@@ -23,8 +23,8 @@ module Instructor
           function = build_function(model)
           parameters[:max_tokens] = 1024 unless parameters.key?(:max_tokens)
           parameters = prepare_parameters(parameters, validation_context, function)
-          ::Anthropic.configuration.extra_headers = { 'anthropic-beta' => 'tools-2024-04-04' }
-          response = ::Anthropic::Client.json_post(path: '/messages', parameters:)
+          parameters.merge!(build_tool_choice(function))
+          response = json_post(path: '/messages', parameters:)
           process_response(response, model)
         end
       end
@@ -37,6 +37,20 @@ module Instructor
       def process_response(response, model)
         parsed_response = Response.new(response).parse
         iterable? ? process_multiple_responses(parsed_response, model) : process_single_response(parsed_response, model)
+      end
+
+      # Builds the tool choice configuration for the API request.
+      #
+      # @param function [Hash] The function details.
+      # @return [Hash] The tool choice configuration.
+
+      def build_tool_choice(function)
+        {
+          tool_choice: {
+            type: 'tool',
+            name: function[:name]
+          }
+        }
       end
 
       # Builds the function details for the API request.
