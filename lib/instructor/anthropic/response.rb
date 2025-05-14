@@ -2,13 +2,13 @@
 
 module Instructor
   module Anthropic
-    # The Response class represents the response received from the OpenAI API.
-    # It takes the raw response and provides convenience methods to access the chat completions,
-    # tool calls, function responses, and parsed arguments.
+    # The Response class represents the response received from the Anthropic API.
+    # It takes the raw response and provides convenience methods to access the content blocks,
+    # tool calls, and parsed arguments.
     class Response
       # Initializes a new instance of the Response class.
       #
-      # @param response [Hash] The response received from the OpenAI API.
+      # @param response [Object] The response received from the Anthropic SDK.
       def initialize(response)
         @response = response
       end
@@ -16,10 +16,7 @@ module Instructor
       # Parses the function response(s) and returns the parsed arguments.
       #
       # @return [Array, Hash] The parsed arguments.
-      # @raise [StandardError] if the api response contains an error.
       def parse
-        raise StandardError, error_message if error?
-
         if single_response?
           arguments.first
         else
@@ -30,27 +27,40 @@ module Instructor
       private
 
       def content
-        @response['content']
+        # Handle both hash-like and object-like responses
+        if @response.respond_to?(:content)
+          @response.content || []
+        elsif @response.is_a?(Hash) && @response['content']
+          @response['content']
+        else
+          []
+        end
       end
 
       def tool_calls
-        content.is_a?(Array) && content.select { |c| c['type'] == 'tool_use' }
+        # Filter content blocks for tool_use type
+        # Handle both hash-like and object-like blocks
+        content.select do |block| 
+          (block.respond_to?(:type) && block.type == 'tool_use') || 
+          (block.is_a?(Hash) && block['type'] == 'tool_use')
+        end
       end
 
       def single_response?
-        tool_calls&.size == 1
+        tool_calls.size == 1
       end
 
       def arguments
-        tool_calls.map { |tc| tc['input'] }
-      end
-
-      def error?
-        @response['type'] == 'error'
-      end
-
-      def error_message
-        "#{@response.dig('error', 'type')} - #{@response.dig('error', 'message')}"
+        tool_calls.map do |tc|
+          # Handle both hash-like and object-like inputs
+          if tc.respond_to?(:input)
+            tc.input
+          elsif tc.is_a?(Hash) && tc['input']
+            tc['input']
+          else
+            {}
+          end
+        end
       end
     end
   end
