@@ -32,7 +32,7 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
 
   spec.add_dependency 'activesupport', '~> 7.0'
-  spec.add_dependency 'anthropic', '~> 0.2'
+  spec.add_dependency 'anthropic-sdk-beta', '~> 0.1.0.pre.beta.6'
   spec.add_dependency 'easy_talk', '~> 0.2'
   spec.add_dependency 'ruby-openai', '~> 7'
   spec.add_development_dependency 'pry-byebug', '~> 3.10'

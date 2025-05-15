@@ -22,7 +22,8 @@ module Instructor
       #  @param model [Class] The response model class.
       #  @return [String] The generated function name.
       def generate_function_name(model)
-        model.schema.fetch(:title, model.name)
+        return 'Default' unless model && model.respond_to?(:schema)
+        model.schema.fetch(:title, model.respond_to?(:name) ? model.name : 'Unknown')
       end
 
       # Generates the description for the function.
@@ -42,12 +43,15 @@ module Instructor
       # @param model [Class] The response model class.
       # @return [String] The generated description.
       def generate_description(model)
+        return 'Default description' unless model
+        
         if model.respond_to?(:instructions)
           raise Instructor::Error, 'The instructions must be a string' unless model.instructions.is_a?(String)
 
           model.instructions
         else
-          "Correctly extracted `#{model.name}` with all the required parameters with correct types"
+          name = model.respond_to?(:name) ? model.name : 'Unknown'
+          "Correctly extracted `#{name}` with all the required parameters with correct types"
         end
       end
 

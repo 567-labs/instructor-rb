@@ -39,8 +39,16 @@ module Instructor
   end
 
   # @param anthropic_client [Anthropic::Client] The Anthropic client to be patched.
-  # @return [Anthropic::Client] The patched Anthropic client.
+  # @return [Class] A patched subclass of Anthropic::Client
   def self.from_anthropic(anthropic_client)
-    anthropic_client.prepend(Instructor::Anthropic::Patch)
+    # Create a new class that extends Anthropic::Client
+    Class.new(anthropic_client) do
+      include Instructor::Anthropic::Patch
+      
+      # Forward initialize to the parent class
+      def initialize(*args, **kwargs)
+        super
+      end
+    end
   end
 end
