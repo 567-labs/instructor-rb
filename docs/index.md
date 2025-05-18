@@ -23,7 +23,7 @@ To check out all the tips and tricks to prompt and extract data, check out the [
 Installation is as simple as:
 
 ```bash
-gem install intructor-rb
+gem install instructor-rb
 ```
 
 
