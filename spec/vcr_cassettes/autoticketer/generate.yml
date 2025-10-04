@@ -27,16 +27,17 @@ http_interactions:
         all these changes. It''s a low-priority task but still important.\n\nCarol:
         I can take that on once the front-end changes for the authentication system
         are done. So, it would be dependent on that.\n\nAlice: Sounds like a plan.
-        Let''s get these tasks modeled out and get started.\n"}],"tools":[{"type":"function","function":{"name":"Actionitems","description":"Correctly
-        extracted `ActionItems` with all the required parameters with correct types","parameters":{"type":"object","properties":{"items":{"type":"array","items":{"type":"object","properties":{"id":{"type":"integer","description":"Unique
+        Let''s get these tasks modeled out and get started.\n"}],"tools":[{"type":"function","function":{"name":"autoticketermodels_actionitems","description":"Correctly
+        extracted `AutoticketerModels::ActionItems` with all the required parameters
+        with correct types","parameters":{"type":"object","properties":{"items":{"type":"array","items":{"type":"object","properties":{"id":{"type":"integer","description":"Unique
         identifier for the ticket"},"name":{"type":"string","description":"Title of
         the ticket"},"description":{"type":"string","description":"Detailed description
         of the ticket"},"priority":{"type":"string","description":"Priority level"},"assignees":{"type":"array","items":{"type":"string"},"description":"List
         of users assigned to the ticket"},"subtasks":{"anyOf":[{"type":"array","items":{"type":"object","properties":{"id":{"type":"integer","description":"Unique
         identifier for the subtask"},"name":{"type":"string","description":"Informative
-        title of the subtask"}},"required":["id","name"]},"description":"List of subtasks
-        associated with the ticket"},{"type":"null"}]},"dependencies":{"anyOf":[{"type":"array","items":{"type":"integer"},"description":"List
-        of ticket IDs that this ticket depends on"},{"type":"null"}]}},"required":["id","name","description","priority","assignees"]}}},"required":["items"]}}}]}'
+        title of the subtask"}},"additionalProperties":false,"required":["id","name"]},"description":"List
+        of subtasks associated with the ticket"},{"type":"null"}]},"dependencies":{"anyOf":[{"type":"array","items":{"type":"integer"},"description":"List
+        of ticket IDs that this ticket depends on"},{"type":"null"}]}},"additionalProperties":false,"required":["id","name","description","priority","assignees","subtasks","dependencies"]}}},"additionalProperties":false,"required":["items"]}}}],"tool_choice":"auto"}'
     headers:
       Content-Type:
       - application/json
@@ -54,62 +55,66 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Fri, 12 Apr 2024 18:42:05 GMT
+      - Thu, 02 Oct 2025 18:26:47 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
-      Access-Control-Allow-Origin:
-      - "*"
-      Cache-Control:
-      - no-cache, must-revalidate
-      Openai-Model:
-      - gpt-3.5-turbo-0125
+      Access-Control-Expose-Headers:
+      - X-Request-ID
       Openai-Organization:
       - user-jtftkqrbreteg5pmdrfzchv6
       Openai-Processing-Ms:
-      - '2596'
+      - '1317'
+      Openai-Project:
+      - proj_2AuZKbF2zHX6djDZFwWGbqic
       Openai-Version:
       - '2020-10-01'
-      Strict-Transport-Security:
-      - max-age=15724800; includeSubDomains
+      X-Envoy-Upstream-Service-Time:
+      - '1649'
       X-Ratelimit-Limit-Requests:
       - '10000'
       X-Ratelimit-Limit-Tokens:
-      - '60000'
+      - '200000'
       X-Ratelimit-Remaining-Requests:
       - '9999'
       X-Ratelimit-Remaining-Tokens:
-      - '59579'
+      - '199594'
       X-Ratelimit-Reset-Requests:
       - 8.64s
       X-Ratelimit-Reset-Tokens:
-      - 421ms
+      - 121ms
       X-Request-Id:
-      - req_5585e8e921a606e6ff650b185bd50af9
+      - req_36fe982099f24602bbcad5585701ff31
+      X-Openai-Proxy-Wasm:
+      - v0.1
       Cf-Cache-Status:
       - DYNAMIC
       Set-Cookie:
-      - __cf_bm=KyXMepIPH_DkWI0HlByAgyNFg0LiLphryKrP44161j0-1712947325-1.0.1.1-Xp1q6Yv31R6tOR_H91DXSzza.2NNen_DgNFpYGetiQ_IWnTPv099_aS20TkatHa3NSBOTMjQNOopWTyvShjcBg;
-        path=/; expires=Fri, 12-Apr-24 19:12:05 GMT; domain=.api.openai.com; HttpOnly;
+      - __cf_bm=IGr4MJxM2CcdEs5k00mMzaYbqBKdbDBbN1uWnp2s18g-1759429607-1.0.1.1-Kyi0KbLJBMwpSoDjduE5uapGVa9XN0ltVL9PneuDtB3arLblZqVdgdQFh3xh9.xXzvGFMWeN6Lt_1txor4nyqQaCJnaajit0acvFKmn.yg4;
+        path=/; expires=Thu, 02-Oct-25 18:56:47 GMT; domain=.api.openai.com; HttpOnly;
         Secure; SameSite=None
-      - _cfuvid=al3HkpS19.N3AhU0yXzSU9vvJjrStn7bzkM3TbjPvnQ-1712947325495-0.0.1.1-604800000;
+      - _cfuvid=lQ5PU5T92z1Gd.K4Pj17.ZnDgLP0xDsH_jJa6kMJrlg-1759429607167-0.0.1.1-604800000;
         path=/; domain=.api.openai.com; HttpOnly; Secure; SameSite=None
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Content-Type-Options:
+      - nosniff
       Server:
       - cloudflare
       Cf-Ray:
-      - 87355a9f884d09ce-MIA
+      - 98863ff2d9facdca-LIM
       Alt-Svc:
       - h3=":443"; ma=86400
     body:
       encoding: ASCII-8BIT
       string: |
         {
-          "id": "chatcmpl-9DG8YYiZR7tfZpLP5xtm6hnOMak9J",
+          "id": "chatcmpl-CMIInradzc8iow4sAKMw38uJtdyOm",
           "object": "chat.completion",
-          "created": 1712947322,
+          "created": 1759429605,
           "model": "gpt-3.5-turbo-0125",
           "choices": [
             {
@@ -119,25 +124,38 @@ http_interactions:
                 "content": null,
                 "tool_calls": [
                   {
-                    "id": "call_Tw9YOum9ssHUSXOndPSYsAn6",
+                    "id": "call_8TTXQfUkHW3NPz5n5nIqbz4o",
                     "type": "function",
                     "function": {
-                      "name": "Actionitems",
-                      "arguments": "{\"items\":[{\"id\":1,\"name\":\"Improve Authentication System\",\"description\":\"Work on front-end revamp and back-end optimization\",\"priority\":\"High\",\"assignees\":[\"Bob\",\"Carol\"],\"subtasks\":[{\"id\":2,\"name\":\"Front-end Revamp\"},{\"id\":3,\"name\":\"Back-end Optimization\"}]},{\"id\":4,\"name\":\"Integrate Authentication System with New Billing System\",\"description\":\"Integrate authentication system with the new billing system\",\"priority\":\"Medium\",\"assignees\":[\"Bob\"],\"dependencies\":[1]},{\"id\":5,\"name\":\"Update User Documentation\",\"description\":\"Update user documentation to reflect changes\",\"priority\":\"Low\",\"assignees\":[\"Carol\"],\"dependencies\":[2]}]}"
+                      "name": "autoticketermodels_actionitems",
+                      "arguments": "{\"items\":[{\"id\":1,\"name\":\"Improve Authentication System\",\"description\":\"Work on front-end revamp and back-end optimization for the authentication system\",\"priority\":\"High\",\"assignees\":[\"Bob\",\"Carol\"],\"subtasks\":[{\"id\":2,\"name\":\"Front-end Revamp\"},{\"id\":3,\"name\":\"Back-end Optimization\"}],\"dependencies\":null},{\"id\":4,\"name\":\"Integrate Authentication with Billing System\",\"description\":\"Integrate the improved authentication system with the new billing system\",\"priority\":\"Medium\",\"assignees\":[\"Bob\"],\"subtasks\":null,\"dependencies\":[1]},{\"id\":5,\"name\":\"Update User Documentation\",\"description\":\"Update user documentation to reflect changes in authentication and billing systems\",\"priority\":\"Low\",\"assignees\":[\"Carol\"],\"subtasks\":null,\"dependencies\":[2]}]}"
                     }
                   }
-                ]
+                ],
+                "refusal": null,
+                "annotations": []
               },
               "logprobs": null,
               "finish_reason": "tool_calls"
             }
           ],
           "usage": {
-            "prompt_tokens": 525,
-            "completion_tokens": 147,
-            "total_tokens": 672
+            "prompt_tokens": 534,
+            "completion_tokens": 174,
+            "total_tokens": 708,
+            "prompt_tokens_details": {
+              "cached_tokens": 0,
+              "audio_tokens": 0
+            },
+            "completion_tokens_details": {
+              "reasoning_tokens": 0,
+              "audio_tokens": 0,
+              "accepted_prediction_tokens": 0,
+              "rejected_prediction_tokens": 0
+            }
           },
-          "system_fingerprint": "fp_c2295e73ad"
+          "service_tier": "default",
+          "system_fingerprint": null
         }
-  recorded_at: Fri, 12 Apr 2024 18:42:05 GMT
-recorded_with: VCR 6.2.0
+  recorded_at: Thu, 02 Oct 2025 18:26:47 GMT
+recorded_with: VCR 6.3.1

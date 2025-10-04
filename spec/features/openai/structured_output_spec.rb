@@ -22,15 +22,15 @@ RSpec.describe 'running an OpenAI function call' do
 
   let(:parameters) do
     {
-      model: 'gpt-3.5-turbo',
+      model: 'gpt-4o-mini',
       messages: [{ role: 'user', content: 'Extract Jason is 25 years old' }]
     }
   end
 
   let(:response_model) { user_model }
 
-  it 'returns a single object with the expected valid attribute values', vcr: 'basic_spec/valid_response' do
-    user = client.chat(parameters:, response_model:)
+  it 'returns a single object with the expected valid attribute values', vcr: 'structured_output/valid_response' do
+    user = client.chat(parameters: parameters, response_model: response_model)
 
     expect(user.name).to eq('Jason')
     expect(user.age).to eq(25)

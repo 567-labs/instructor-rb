@@ -5,9 +5,9 @@ http_interactions:
     uri: https://api.anthropic.com/v1/messages
     body:
       encoding: UTF-8
-      string: '{"model":"claude-3-opus-20240229","messages":[{"role":"user","content":"Extract
-        Jason is 25 years old"}],"max_tokens":1024,"tools":[{"name":"invalidmodel","description":"Correctly
-        extracted `InvalidModel` with all the required parameters with correct types","input_schema":{"type":"object","properties":{"name":{"type":"string"},"age":{"type":"integer"}},"additionalProperties":false,"required":["name","age"]}}],"tool_choice":{"type":"tool","name":"invalidmodel"}}'
+      string: '{"model":"claude-sonnet-4-20250514","messages":[{"role":"user","content":"Extract
+        Jason is 25 years old"}],"max_tokens":1024,"tools":[{"name":"user","description":"Correctly
+        extracted `User` with all the required parameters with correct types","input_schema":{"type":"object","properties":{"name":{"type":"string"},"age":{"type":"integer"}},"additionalProperties":false,"required":["name","age"]}}],"tool_choice":{"type":"tool","name":"user"}}'
     headers:
       X-Api-Key:
       - "<ANTHROPIC_KEY_PLACEHOLDER>"
@@ -15,8 +15,6 @@ http_interactions:
       - '2023-06-01'
       Content-Type:
       - application/json
-      Anthropic-Beta:
-      - tools-2024-04-04
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -29,7 +27,7 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 02 Oct 2025 18:26:43 GMT
+      - Thu, 02 Oct 2025 18:23:59 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
@@ -37,37 +35,37 @@ http_interactions:
       Connection:
       - keep-alive
       Anthropic-Ratelimit-Input-Tokens-Limit:
-      - '20000'
+      - '30000'
       Anthropic-Ratelimit-Input-Tokens-Remaining:
-      - '20000'
+      - '30000'
       Anthropic-Ratelimit-Input-Tokens-Reset:
-      - '2025-10-02T18:26:43Z'
+      - '2025-10-02T18:23:59Z'
       Anthropic-Ratelimit-Output-Tokens-Limit:
-      - '4000'
+      - '8000'
       Anthropic-Ratelimit-Output-Tokens-Remaining:
-      - '4000'
+      - '8000'
       Anthropic-Ratelimit-Output-Tokens-Reset:
-      - '2025-10-02T18:26:44Z'
+      - '2025-10-02T18:24:00Z'
       Anthropic-Ratelimit-Requests-Limit:
       - '50'
       Anthropic-Ratelimit-Requests-Remaining:
       - '49'
       Anthropic-Ratelimit-Requests-Reset:
-      - '2025-10-02T18:26:43Z'
+      - '2025-10-02T18:23:59Z'
       Anthropic-Ratelimit-Tokens-Limit:
-      - '24000'
+      - '38000'
       Anthropic-Ratelimit-Tokens-Remaining:
-      - '24000'
+      - '38000'
       Anthropic-Ratelimit-Tokens-Reset:
-      - '2025-10-02T18:26:43Z'
+      - '2025-10-02T18:23:59Z'
       Request-Id:
-      - req_011CTiqqaoJaTXcyT7Kw9tqY
+      - req_011CTiqdXbEgyTzEgLrUr9i8
       Strict-Transport-Security:
       - max-age=31536000; includeSubDomains; preload
       Anthropic-Organization-Id:
       - ae455ef8-0ea5-4779-a1ff-1228616561d2
       X-Envoy-Upstream-Service-Time:
-      - '2099'
+      - '1552'
       Via:
       - 1.1 google
       Cf-Cache-Status:
@@ -77,9 +75,9 @@ http_interactions:
       Server:
       - cloudflare
       Cf-Ray:
-      - 98863fe2ee4fb6f2-BOG
+      - 98863be43c0ab6f2-BOG
     body:
       encoding: ASCII-8BIT
-      string: '{"id":"msg_018K2FPihpHjeeH4pHEEJFMu","type":"message","role":"assistant","model":"claude-3-opus-20240229","content":[{"type":"tool_use","id":"toolu_01QqqJm7JF5evuaWrytuMye4","name":"invalidmodel","input":{"name":"Jason","age":""}}],"stop_reason":"tool_use","stop_sequence":null,"usage":{"input_tokens":397,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":50,"service_tier":"standard"}}'
-  recorded_at: Thu, 02 Oct 2025 18:26:43 GMT
+      string: '{"id":"msg_015ovaRcwJExGq8jDeKpYvyu","type":"message","role":"assistant","model":"claude-sonnet-4-20250514","content":[{"type":"tool_use","id":"toolu_013RZsUB5nPpn3kEQFWehLAZ","name":"user","input":{"name":"Jason","age":25}}],"stop_reason":"tool_use","stop_sequence":null,"usage":{"input_tokens":413,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":50,"service_tier":"standard"}}'
+  recorded_at: Thu, 02 Oct 2025 18:23:59 GMT
 recorded_with: VCR 6.3.1

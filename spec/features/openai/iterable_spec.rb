@@ -18,7 +18,7 @@ RSpec.describe 'running an OpenAI function with a multiple object response' do
     end
   end
 
-  let(:client) { Instructor.from_openai(OpenAI::Client, mode: Instructor::Mode::TOOLS.required).new }
+  let(:client) { Instructor.from_openai(OpenAI::Client, mode: Instructor::Mode::TOOLS).new }
 
   let(:parameters) do
     {

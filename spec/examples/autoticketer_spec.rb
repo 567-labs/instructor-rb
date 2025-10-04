@@ -8,7 +8,7 @@ RSpec.describe 'Auto-ticketer' do
     c.include AutoticketerModels
   end
 
-  let(:client) { Instructor.from_openai(OpenAI::Client).new }
+  let(:client) { Instructor.from_openai(OpenAI::Client, mode: :function_calling).new }
 
   let(:data) do
     <<~DATA
@@ -62,52 +62,55 @@ RSpec.describe 'Auto-ticketer' do
 
     expect(result.as_json).to include_json(
       {
-        "items": [
-          {
+      "items": [
+         {
             "id": 1,
-            "name": 'Improve Authentication System',
-            "description": 'Work on front-end revamp and back-end optimization',
-            "priority": 'High',
-            "assignees": %w[
-              Bob
-              Carol
+            "name": "Improve Authentication System",
+            "description": "Work on front-end revamp and back-end optimization for the authentication system",
+            "priority": "High",
+            "assignees": [
+            "Bob",
+            "Carol"
             ],
             "subtasks": [
-              {
-                "id": 2,
-                "name": 'Front-end Revamp'
-              },
-              {
-                "id": 3,
-                "name": 'Back-end Optimization'
-              }
-            ]
-          },
-          {
+            {
+               "id": 2,
+               "name": "Front-end Revamp"
+            },
+            {
+               "id": 3,
+               "name": "Back-end Optimization"
+            }
+            ],
+            "dependencies": nil
+         },
+         {
             "id": 4,
-            "name": 'Integrate Authentication System with New Billing System',
-            "description": 'Integrate authentication system with the new billing system',
-            "priority": 'Medium',
+            "name": "Integrate Authentication with Billing System",
+            "description": "Integrate the improved authentication system with the new billing system",
+            "priority": "Medium",
             "assignees": [
-              'Bob'
+            "Bob"
             ],
+            "subtasks": nil,
             "dependencies": [
-              1
+            1
             ]
-          },
-          {
+         },
+         {
             "id": 5,
-            "name": 'Update User Documentation',
-            "description": 'Update user documentation to reflect changes',
-            "priority": 'Low',
+            "name": "Update User Documentation",
+            "description": "Update user documentation to reflect changes in authentication and billing systems",
+            "priority": "Low",
             "assignees": [
-              'Carol'
+            "Carol"
             ],
+            "subtasks": nil,
             "dependencies": [
-              2
+            2
             ]
-          }
-        ]
+         }
+      ]
       }
     )
   end

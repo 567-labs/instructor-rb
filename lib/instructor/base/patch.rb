@@ -2,7 +2,6 @@
 
 module Instructor
   module Base
-    # The `Patch` module provides common methods for patching and modifying the client behavior.
     module Patch
       # Generates the function name for the API request.
       # You can customize the function name for the LLM by adding a `title` key to the schema.
@@ -18,11 +17,12 @@ module Instructor
       # end
       #  ```
       #  The function name will be `User`.
-      #  If the `title` key is not present, the function name will be the model's name.
+      #  If the `title` key is not present, the function name will be a modified version of the model's name.
       #  @param model [Class] The response model class.
       #  @return [String] The generated function name.
       def generate_function_name(model)
-        model.schema.fetch(:title, model.name)
+        model_name = model.json_schema.fetch('title', model.name)
+        model_name.gsub('::', '_').gsub(/[^a-zA-Z0-9_]/, '').downcase
       end
 
       # Generates the description for the function.

@@ -6,17 +6,15 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"model":"claude-3-opus-20240229","messages":[{"role":"user","content":"Extract
-        Jason is 25 years old"}],"max_tokens":1024,"tools":[{"name":"User","description":"Correctly
-        extracted `User` with all the required parameters with correct types","input_schema":{"type":"object","properties":{"name":{"type":"string"},"age":{"type":"integer"}},"required":["name","age"]}}]}'
+        Jason is 25 years old"}],"max_tokens":1024,"tools":[{"name":"user","description":"Correctly
+        extracted `User` with all the required parameters with correct types","input_schema":{"type":"object","properties":{"name":{"type":"string"},"age":{"type":"integer"}},"additionalProperties":false,"required":["name","age"]}}],"tool_choice":{"type":"tool","name":"user"}}'
     headers:
-      Content-Type:
-      - application/json
       X-Api-Key:
-      - <ANTHROPIC_KEY_PLACEHOLDER>
+      - "<ANTHROPIC_KEY_PLACEHOLDER>"
       Anthropic-Version:
       - '2023-06-01'
-      Anthropic-Beta:
-      - tools-2024-04-04
+      Content-Type:
+      - application/json
       Accept-Encoding:
       - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
       Accept:
@@ -29,45 +27,57 @@ http_interactions:
       message: OK
     headers:
       Date:
-      - Thu, 09 May 2024 16:30:05 GMT
+      - Thu, 02 Oct 2025 18:26:39 GMT
       Content-Type:
       - application/json
       Transfer-Encoding:
       - chunked
       Connection:
       - keep-alive
+      Anthropic-Ratelimit-Input-Tokens-Limit:
+      - '20000'
+      Anthropic-Ratelimit-Input-Tokens-Remaining:
+      - '20000'
+      Anthropic-Ratelimit-Input-Tokens-Reset:
+      - '2025-10-02T18:26:37Z'
+      Anthropic-Ratelimit-Output-Tokens-Limit:
+      - '4000'
+      Anthropic-Ratelimit-Output-Tokens-Remaining:
+      - '4000'
+      Anthropic-Ratelimit-Output-Tokens-Reset:
+      - '2025-10-02T18:26:39Z'
       Anthropic-Ratelimit-Requests-Limit:
-      - '5'
+      - '50'
       Anthropic-Ratelimit-Requests-Remaining:
-      - '4'
+      - '49'
       Anthropic-Ratelimit-Requests-Reset:
-      - '2024-05-09T16:31:30Z'
+      - '2025-10-02T18:26:37Z'
       Anthropic-Ratelimit-Tokens-Limit:
-      - '10000'
+      - '24000'
       Anthropic-Ratelimit-Tokens-Remaining:
-      - '9000'
+      - '24000'
       Anthropic-Ratelimit-Tokens-Reset:
-      - '2024-05-09T16:31:30Z'
+      - '2025-10-02T18:26:37Z'
       Request-Id:
-      - req_01LRMuxYDXrJtQa7EBuwcwrJ
-      X-Cloud-Trace-Context:
-      - 12b1b2d6fb75df0730777980cbf8e87a
+      - req_011CTiqqCXrU2N3eefz43owj
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      Anthropic-Organization-Id:
+      - ae455ef8-0ea5-4779-a1ff-1228616561d2
+      X-Envoy-Upstream-Service-Time:
+      - '2399'
       Via:
       - 1.1 google
       Cf-Cache-Status:
       - DYNAMIC
+      X-Robots-Tag:
+      - none
       Server:
       - cloudflare
       Cf-Ray:
-      - 881312395967a677-MIA
+      - 98863fc2481fb6f5-BOG
     body:
       encoding: ASCII-8BIT
-      string: '{"id":"msg_01GmF8irRChwxKSGNXWB64YA","type":"message","role":"assistant","model":"claude-3-opus-20240229","stop_sequence":null,"usage":{"input_tokens":486,"output_tokens":171},"content":[{"type":"text","text":"<thinking>\nThe
-        user has provided a sentence that appears to contain information in the format
-        needed for the User function. Let''s break it down:\n\nName: The name \"Jason\"
-        is provided directly in the input.\nAge: The age of 25 years old is provided
-        directly after the name.\n\nBoth of the required parameters for the User function
-        (name and age) are present in the input. Since we have all the necessary information,
-        we can proceed with calling the User function.\n</thinking>"},{"type":"tool_use","id":"toolu_01Um2D6sgPCrZmh7gNYn5Luu","name":"User","input":{"name":"Jason","age":25}}],"stop_reason":"tool_use"}'
-  recorded_at: Thu, 09 May 2024 16:30:05 GMT
-recorded_with: VCR 6.2.0
+      string: '{"id":"msg_01Xm6f5uDrgqZGqik9GizgRH","type":"message","role":"assistant","model":"claude-3-opus-20240229","content":[{"type":"tool_use","id":"toolu_01VPsjUwGExCrwnttYjie5Jc","name":"user","input":{"name":"Jason","age":25}}],"stop_reason":"tool_use","stop_sequence":null,"usage":{"input_tokens":394,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"cache_creation":{"ephemeral_5m_input_tokens":0,"ephemeral_1h_input_tokens":0},"output_tokens":50,"service_tier":"standard"}}'
+  recorded_at: Thu, 02 Oct 2025 18:26:38 GMT
+recorded_with: VCR 6.3.1

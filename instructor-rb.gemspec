@@ -31,10 +31,10 @@ Gem::Specification.new do |spec|
 
   spec.require_paths = ['lib']
 
-  spec.add_dependency 'activesupport', '~> 7.0'
-  spec.add_dependency 'anthropic', '~> 0.2'
-  spec.add_dependency 'easy_talk', '~> 0.2'
-  spec.add_dependency 'ruby-openai', '~> 7'
+  spec.add_dependency 'activesupport', '>= 6.0'
+  spec.add_dependency 'easy_talk', '~> 2'
+  spec.add_dependency 'ruby-anthropic', '~> 0.4'
+  spec.add_dependency 'ruby-openai', '~> 8'
   spec.add_development_dependency 'pry-byebug', '~> 3.10'
   spec.add_development_dependency 'rake', '~> 13.1'
   spec.add_development_dependency 'rspec', '~> 3.0'

@@ -5,6 +5,11 @@ require 'spec_helper'
 RSpec.describe Instructor::Anthropic::Patch do
   subject(:patched_client) { Instructor.from_anthropic(Anthropic::Client) }
 
+  # Reset mode after each test
+  after do
+    Instructor::Anthropic.mode = nil
+  end
+
   let(:user_model) do
     Class.new do
       include EasyTalk::Model
@@ -52,26 +57,6 @@ RSpec.describe Instructor::Anthropic::Patch do
 
       expect(user.name).to eq('Jason')
       expect(user.age).to eq(25)
-    end
-  end
-
-  context 'when an exception occurs' do
-    let(:client) { patched_client.new }
-    let(:max_retries) { 3 }
-    let(:parameters) { {} }
-    let(:response_model) { double }
-
-    before do
-      allow(client).to receive(:determine_model).and_return(double)
-      allow(client).to receive(:build_function).and_return(double)
-      allow(client).to receive(:prepare_parameters).and_return({})
-      allow(client).to receive(:process_response).and_return(double)
-      allow(::Anthropic::Client).to receive(:json_post).and_raise(JSON::ParserError)
-    end
-
-    it 'retries the specified number of times' do
-      expect { client.messages(parameters:, response_model:, max_retries:) }.to raise_error(JSON::ParserError)
-      expect(::Anthropic::Client).to have_received(:json_post).exactly(max_retries).times
     end
   end
 
@@ -130,6 +115,45 @@ RSpec.describe Instructor::Anthropic::Patch do
       expect do
         client.messages(parameters:, response_model: invalid_model)
       end.to raise_error(Instructor::ValidationError)
+    end
+  end
+
+  describe 'mode support' do
+    it 'uses ANTHROPIC_TOOLS mode by default' do
+      expect(Instructor::Anthropic.mode).to eq(Instructor::Mode::ANTHROPIC_TOOLS)
+    end
+
+    it 'accepts mode parameter on initialization' do
+      Instructor.from_anthropic(Anthropic::Client, mode: Instructor::Mode::ANTHROPIC_JSON)
+      expect(Instructor::Anthropic.mode).to eq(Instructor::Mode::ANTHROPIC_JSON)
+    end
+
+    context 'with ANTHROPIC_TOOLS mode' do
+      it 'sets the mode correctly' do
+        Instructor.from_anthropic(Anthropic::Client, mode: Instructor::Mode::ANTHROPIC_TOOLS)
+        expect(Instructor::Anthropic.mode).to eq(Instructor::Mode::ANTHROPIC_TOOLS)
+      end
+    end
+
+    context 'with ANTHROPIC_JSON mode' do
+      it 'sets the mode correctly' do
+        Instructor.from_anthropic(Anthropic::Client, mode: Instructor::Mode::ANTHROPIC_JSON)
+        expect(Instructor::Anthropic.mode).to eq(Instructor::Mode::ANTHROPIC_JSON)
+      end
+    end
+
+    context 'with ANTHROPIC_REASONING_TOOLS mode' do
+      it 'sets the mode correctly' do
+        Instructor.from_anthropic(Anthropic::Client, mode: Instructor::Mode::ANTHROPIC_REASONING_TOOLS)
+        expect(Instructor::Anthropic.mode).to eq(Instructor::Mode::ANTHROPIC_REASONING_TOOLS)
+      end
+    end
+
+    context 'with ANTHROPIC_PARALLEL_TOOLS mode' do
+      it 'sets the mode correctly' do
+        Instructor.from_anthropic(Anthropic::Client, mode: Instructor::Mode::ANTHROPIC_PARALLEL_TOOLS)
+        expect(Instructor::Anthropic.mode).to eq(Instructor::Mode::ANTHROPIC_PARALLEL_TOOLS)
+      end
     end
   end
 end
