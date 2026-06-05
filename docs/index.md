@@ -33,6 +33,7 @@ require 'instructor-rb'
 OpenAI.configure do |config|
     config.access_token = ENV.fetch("OPENAI_ACCESS_TOKEN")
     config.organization_id = ENV.fetch("OPENAI_ORGANIZATION_ID") # Optional.
+    config.uri_base = ENV.fetch("OPENAI_BASE_URL", "https://api.openai.com/v1") # Optional.
 end
 
 class UserDetail
